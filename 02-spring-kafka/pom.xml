@@ -15,6 +15,7 @@
         <module>lab02-producer-demo</module>
         <module>lab02-consumer-demo</module>
         <module>lab02-consumer-json</module>
+        <module>lab02-simple-errorhandler</module>
     </modules>
 
 </project>
