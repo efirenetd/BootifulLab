@@ -1,16 +1,15 @@
 package org.efire.net.common;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.consumer.Consumer;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.boot.autoconfigure.kafka.ConcurrentKafkaListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
-import org.springframework.kafka.listener.CommonErrorHandler;
-import org.springframework.kafka.listener.MessageListenerContainer;
+import org.springframework.kafka.listener.ContainerProperties.AckMode;
+import org.springframework.kafka.listener.DefaultErrorHandler;
+import org.springframework.util.backoff.FixedBackOff;
 
 @Configuration
 @EnableKafka
@@ -23,18 +22,10 @@ public class AppConfig {
             ConsumerFactory<Object, Object> kafkaConsumerFactory) {
         ConcurrentKafkaListenerContainerFactory<Object, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         configurer.configure(factory, kafkaConsumerFactory);
-        factory.setConcurrency(3);
-        // NOTE: setErrorHandler interface was DEPRECATED since v2.8 (also setBatchErrorHandler), in favor of setCommonErrorHandler
-        //factory.setErrorHandler (...)
-
-        // logs an error message, no retries or backoff
-        factory.setCommonErrorHandler(new CommonErrorHandler() {
-            @Override
-            public void handleRecord(Exception thrownException, ConsumerRecord<?, ?> record, Consumer<?, ?> consumer, MessageListenerContainer container) {
-                //CommonErrorHandler.super.handleRecord(thrownException, record, consumer, container);
-                log.error("=== Error in Lab02 Consumer: \n {} \n Record: \n {}", thrownException, record);
-            }
-        });
+        factory.getContainerProperties().setAckMode(AckMode.RECORD);
+        // Overrides the default configuration FixedBackOff(0L, 9L)
+        // Below will retry a delivery up to 2 times (3 delivery attempts)
+        factory.setCommonErrorHandler(new DefaultErrorHandler(new FixedBackOff(1000L, 2L)));
         return factory;
     }
 

@@ -16,6 +16,7 @@
         <module>lab02-consumer-demo</module>
         <module>lab02-consumer-json</module>
         <module>lab02-simple-errorhandler</module>
+        <module>lab02-simple-retries-backoff</module>
     </modules>
 
 </project>
