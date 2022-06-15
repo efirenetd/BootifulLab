@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>lab01-restapi-redis-cache</module>
+        <module>lab03-rest-assured</module>
     </modules>
 
 </project>
