@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,10 +28,13 @@ public class Lab03App implements CommandLineRunner {
 
         var winner1 = new Winner();
         winner1.setLotto(lotto);
+        winner1.setNumbers(Arrays.asList(1,2,3));
 
         var winner2 = new Winner();
         winner2.setLotto(lotto);
+        winner2.setNumbers(Arrays.asList(1,2,3,4,5));
 
+        lotto.setWinningNumbers(Arrays.asList(1,2,3,4,5,6));
         Set<Winner> winnerSet = new HashSet<>();
         winnerSet.add(winner1);
         winnerSet.add(winner2);

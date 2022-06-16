@@ -1,17 +1,23 @@
 package org.efire.net.model;
 
+import lombok.ToString;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "tbl_lotto")
+@ToString
 public class Lotto {
 
     public Lotto() {
     }
 
-    public Lotto(Integer lottoId, Set<Winner> winners) {
+    public Lotto(Integer lottoId, List<Integer> winningNumbers, Set<Winner> winners) {
         this.lottoId = lottoId;
+        this.winningNumbers = winningNumbers;
         this.winners = winners;
     }
 
@@ -20,8 +26,8 @@ public class Lotto {
     @Column(nullable = false)
     private Integer lottoId;
 
-/*    @ElementCollection
-    private List<Integer> winningNumbers = new ArrayList<>();*/
+    @ElementCollection
+    private List<Integer> winningNumbers = new ArrayList<>();
 
     @OneToMany(mappedBy = "lotto", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Winner> winners;
@@ -38,11 +44,11 @@ public class Lotto {
         this.winners = winners;
     }
 
-    @Override
-    public String toString() {
-        return "Lotto{" +
-                "lottoId=" + lottoId +
-                ", winners=" + winners +
-                '}';
+    public List<Integer> getWinningNumbers() {
+        return winningNumbers;
+    }
+
+    public void setWinningNumbers(List<Integer> winningNumbers) {
+        this.winningNumbers = winningNumbers;
     }
 }

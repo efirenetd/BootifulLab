@@ -13,7 +13,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping
+@RequestMapping("/lab03")
 public class Lab03Controller {
 
     @Autowired
@@ -25,12 +25,13 @@ public class Lab03Controller {
         var byId = repository.findByLottoId(lottoId);
 
         var lotto = byId.orElseThrow(() -> new EntityNotFoundException("No record found"));
-        var winners = lotto.getWinners().stream().collect(Collectors.toList());;
+        var winningNumbers = lotto.getWinningNumbers();
+        var winners = lotto.getWinners().stream().collect(Collectors.toList());
 
         var lottoDto = new LottoDto();
         lottoDto.setLottoId(lottoId);
-
         lottoDto.setWinners(winners);
+        lottoDto.setWinningNumbers(winningNumbers);
         return ResponseEntity.ok(lottoDto);
 
     }

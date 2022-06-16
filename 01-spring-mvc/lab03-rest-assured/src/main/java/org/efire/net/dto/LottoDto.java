@@ -12,5 +12,6 @@ import java.util.List;
 public class LottoDto {
 
     private Integer lottoId;
+    private List<Integer> winningNumbers;
     private List<Winner> winners;
 }
