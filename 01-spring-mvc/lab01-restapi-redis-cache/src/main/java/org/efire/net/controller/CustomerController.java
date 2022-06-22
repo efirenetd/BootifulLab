@@ -24,9 +24,15 @@ public class CustomerController {
         return ResponseEntity.ok(mapper.toDto(newCustomer));
     }
 
+    @PutMapping("/{customerId}")
+    public ResponseEntity<CustomerDto> updateCustomer(@PathVariable("customerId") Long customerId, @RequestBody CustomerDto dto) {
+        var updatedCustomer = customerService.update(customerId, dto);
+        return ResponseEntity.ok(mapper.toDto(updatedCustomer));
+    }
+
     @GetMapping
     public ResponseEntity<List<CustomerDto>> retrieveAllCustomers() {
-
         return ResponseEntity.ok(mapper.toDtoList(customerService.getAll()));
     }
+
 }

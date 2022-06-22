@@ -1,17 +1,19 @@
 package org.efire.net.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import static com.fasterxml.jackson.annotation.JsonInclude.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerDto {
 
-    @JsonIgnore
-    private String customerId;
+    @JsonInclude(Include.NON_NULL)
+    private Long customerId;
     private String name;
     private String contactName;
     private String address;
