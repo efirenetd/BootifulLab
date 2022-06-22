@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  # Reference: https://graspingtech.com/docker-compose-postgresql/
+  db:
+    image: 'postgres:13.1-alpine'
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
+    container_name: db
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - APP_DB_USER=redispostgres
+      - APP_DB_PASS=redispostgres
+      - APP_DB_NAME=redis_postgres
+      - APP_DB_SCHEMA=testdb
+    networks:
+      - caffeine-postgres-net
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+
+networks:
+  caffeine-postgres-net:
+    driver: bridge
