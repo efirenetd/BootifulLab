@@ -6,7 +6,8 @@
 	<modules>
 		<module>01-spring-mvc</module>
 		<module>02-spring-kafka</module>
-	</modules>
+        <module>03-spring-amqp</module>
+    </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

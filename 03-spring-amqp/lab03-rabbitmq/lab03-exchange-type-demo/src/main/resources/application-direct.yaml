@@ -1,0 +1,17 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+lab03:
+  exchangeName: pdf_events
+  bindings:
+    pdfCreate:
+      queueName: create_pdf_queue
+      routingKey: pdf_create
+    pdfLog:
+      queueName: pdf_log_queue
+      routingKey: pdf_log
+
