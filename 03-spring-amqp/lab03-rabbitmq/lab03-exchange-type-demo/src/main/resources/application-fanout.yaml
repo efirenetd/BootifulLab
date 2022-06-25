@@ -1,0 +1,14 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+lab03:
+  exchangeName: sport_news
+  bindings:
+    sportsChannelQueueA:
+      - espn_sports_news_queue
+      - yahoo_sports_news_queue
+      - theguardian_sports_news_queue
