@@ -1,0 +1,20 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+lab03:
+  exchangeName: agreements
+  bindings:
+    berlin:
+      queueName: berlin_agreements
+      routingKey: agreements.eu.berlin.#
+    all:
+      queueName: all_agreements
+      routingKey: agreements.#
+    headstore:
+      queueName: headstore_agreements
+      routingKey: agreements.*.headstore
+

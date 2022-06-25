@@ -1,7 +1,7 @@
 package org.efire.net.config;
 
 import org.efire.net.common.DirectExchangeProperties;
-import org.efire.net.consumer.Lab03Consumer;
+import org.efire.net.consumer.DirectConsumer;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -32,7 +32,7 @@ public class DirectExchangeConfig {
     }
 
     @Bean
-    MessageListenerAdapter listenerAdapter(Lab03Consumer consumer) {
+    MessageListenerAdapter listenerAdapter(DirectConsumer consumer) {
         return new MessageListenerAdapter(consumer, "receiveMessage");
     }
 

@@ -6,19 +6,21 @@ import org.efire.net.message.Lab03MessageA;
 import org.efire.net.message.Lab03MessageB;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Component
-public class Lab03Producer implements CommandLineRunner {
+@Profile("direct")
+public class DirectProducer implements CommandLineRunner {
 
     private RabbitTemplate rabbitTemplate;
     private ObjectMapper objectMapper;
     private DirectExchangeProperties props;
 
-    public Lab03Producer(RabbitTemplate rabbitTemplate, ObjectMapper objectMapper, DirectExchangeProperties props) {
+    public DirectProducer(RabbitTemplate rabbitTemplate, ObjectMapper objectMapper, DirectExchangeProperties props) {
         this.rabbitTemplate = rabbitTemplate;
         this.objectMapper = objectMapper;
         this.props = props;
