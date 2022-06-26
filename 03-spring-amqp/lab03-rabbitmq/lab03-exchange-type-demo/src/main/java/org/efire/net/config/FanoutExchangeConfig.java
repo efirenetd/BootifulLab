@@ -1,6 +1,7 @@
 package org.efire.net.config;
 
 import org.efire.net.common.FanoutExchangeProperties;
+import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Declarables;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.QueueBuilder;
@@ -24,10 +25,14 @@ public class FanoutExchangeConfig {
     public Declarables topicBindings() {
         FanoutExchange fanoutExchange = new FanoutExchange(props.getExchangeName());
         Declarables declarables = new Declarables(fanoutExchange);
-        declarables.getDeclarables().addAll(
-                props.sportsChannelQueueA().stream()
-                        .map(queueName -> QueueBuilder.durable(queueName).build())
-                        .collect(Collectors.toList()));
+        var queueList = props.getSportsChannelQueueA().stream()
+                .map(queueName -> QueueBuilder.durable(queueName).build())
+                .collect(Collectors.toList());
+        var bindingList = queueList.stream()
+                .map(queueName -> BindingBuilder.bind(queueName).to(fanoutExchange))
+                .collect(Collectors.toList());
+        declarables.getDeclarables().addAll(queueList);
+        declarables.getDeclarables().addAll(bindingList);
         return declarables;
     }
 }
