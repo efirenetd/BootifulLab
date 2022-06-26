@@ -22,7 +22,7 @@ public class FanoutExchangeConfig {
     }
 
     @Bean
-    public Declarables topicBindings() {
+    public Declarables fanoutBindings() {
         FanoutExchange fanoutExchange = new FanoutExchange(props.getExchangeName());
         Declarables declarables = new Declarables(fanoutExchange);
         var queueList = props.getSportsChannelQueueA().stream()

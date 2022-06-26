@@ -1,0 +1,32 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+lab03:
+  exchangeName: agreements
+  bindings:
+    pdfReport:
+      queueName: pdf_report_queue
+      headers:
+        #x-match: all
+        format: pdf
+        type: report
+    zipReport:
+      queueName: zip_report_queue
+      headers:
+        #x-match: all
+        format: zip
+        type: report
+    pdfLog:
+      queueName: pdf_log_queue
+      headers:
+        #x-match: any
+        format: pdf
+        type: log
+
+
+
+
