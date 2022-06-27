@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Profile("header")
-public class HeaderProducer implements CommandLineRunner {
+public class HeaderMessageSender implements CommandLineRunner {
 
     private RabbitTemplate rabbitTemplate;
     private HeaderExchangeProperties props;
 
-    public HeaderProducer(RabbitTemplate rabbitTemplate, HeaderExchangeProperties props) {
+    public HeaderMessageSender(RabbitTemplate rabbitTemplate, HeaderExchangeProperties props) {
         this.rabbitTemplate = rabbitTemplate;
         this.props = props;
     }
@@ -29,11 +29,20 @@ public class HeaderProducer implements CommandLineRunner {
                 .setHeader("format", "pdf")
                 .setHeader("type", "report")
                 .build();
-        // publish message to pdf_report_queue and pdf_log_queue
+        /**
+         *  Message is published to exchange 'agreeement' and is delivered to
+         *  pdf_report_queue because all key/value pairs match( format = pdf and type = report, x-match = all)
+         *  and
+         *  pdf_log_queue since "format = pdf" is a match (because binding rule was set to "x-match = any")
+         */
         rabbitTemplate.convertAndSend(props.getExchangeName(), "", messageToPdfAndLog);
 
         // lambda implementation sending message
-        // publish message to zip_report_queue and pdf_log_queue
+        /**
+         *  Message is publish to exchange 'agreements' and is delivered to
+         *  zip_report_queue because its key/value header pairs only to this binding rule
+         *  (format = zip, type = report, x-match = all)
+         */
         rabbitTemplate.convertAndSend(props.getExchangeName(), "",
                 "HI ZIP REPORT via HEADER",
                 m -> {

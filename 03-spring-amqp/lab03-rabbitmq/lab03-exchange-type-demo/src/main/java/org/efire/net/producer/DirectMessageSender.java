@@ -14,13 +14,13 @@ import java.util.UUID;
 
 @Component
 @Profile("direct")
-public class DirectProducer implements CommandLineRunner {
+public class DirectMessageSender implements CommandLineRunner {
 
     private RabbitTemplate rabbitTemplate;
     private ObjectMapper objectMapper;
     private DirectExchangeProperties props;
 
-    public DirectProducer(RabbitTemplate rabbitTemplate, ObjectMapper objectMapper, DirectExchangeProperties props) {
+    public DirectMessageSender(RabbitTemplate rabbitTemplate, ObjectMapper objectMapper, DirectExchangeProperties props) {
         this.rabbitTemplate = rabbitTemplate;
         this.objectMapper = objectMapper;
         this.props = props;

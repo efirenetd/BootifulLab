@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Profile("topic")
-public class TopicProducer implements CommandLineRunner {
+public class TopicMessageSender implements CommandLineRunner {
 
     private RabbitTemplate rabbitTemplate;
     private TopicExchangeProperties props;
 
-    public TopicProducer(RabbitTemplate rabbitTemplate, TopicExchangeProperties props) {
+    public TopicMessageSender(RabbitTemplate rabbitTemplate, TopicExchangeProperties props) {
         this.rabbitTemplate = rabbitTemplate;
         this.props = props;
     }
@@ -22,12 +22,12 @@ public class TopicProducer implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         //publish Berlin message
-        //rabbitTemplate.convertAndSend(props.getExchangeName(), props.berlin().getRoutingKey(),"DEAR BERLIN");
+        rabbitTemplate.convertAndSend(props.getExchangeName(), props.berlin().getRoutingKey(),"DEAR BERLIN");
 
         //publish HeadStore message
         rabbitTemplate.convertAndSend(props.getExchangeName(), props.headstore().getRoutingKey(),"DEAR HEADSTORE");
 
         //publish ALL message
-        //rabbitTemplate.convertAndSend(props.getExchangeName(), props.all().getRoutingKey(),"DEAR ALL");
+        rabbitTemplate.convertAndSend(props.getExchangeName(), props.all().getRoutingKey(),"DEAR ALL");
     }
 }

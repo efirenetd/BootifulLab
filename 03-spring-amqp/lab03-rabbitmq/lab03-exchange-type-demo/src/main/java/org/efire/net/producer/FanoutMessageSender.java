@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Profile("fanout")
-public class FanoutProducer implements CommandLineRunner {
+public class FanoutMessageSender implements CommandLineRunner {
 
     private RabbitTemplate rabbitTemplate;
     private FanoutExchangeProperties props;
 
-    public FanoutProducer(RabbitTemplate rabbitTemplate, FanoutExchangeProperties props) {
+    public FanoutMessageSender(RabbitTemplate rabbitTemplate, FanoutExchangeProperties props) {
         this.rabbitTemplate = rabbitTemplate;
         this.props = props;
     }
