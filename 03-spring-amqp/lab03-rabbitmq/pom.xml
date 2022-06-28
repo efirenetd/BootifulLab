@@ -13,6 +13,19 @@
     <modules>
         <module>lab03-exchange-type-demo</module>
         <module>lab03-testcontainer-demo</module>
+        <module>lab03-pub-confirms-returns</module>
     </modules>
 
+    <properties>
+        <testcontainers.version>1.17.2</testcontainers.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>${testcontainers.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
