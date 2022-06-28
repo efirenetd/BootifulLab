@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>lab03-exchange-type-demo</module>
+        <module>lab03-testcontainer-demo</module>
     </modules>
 
 </project>

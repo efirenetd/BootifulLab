@@ -1,0 +1,3 @@
+* Run a docker RabbitMQ container
+```docker run -d -p 5672:5672 -p 15672:15672 --hostname my-rabbit --name some-rabbit rabbitmq:3-management-alpine```
+* Execute ```Lab03TestcontainerAppTests.java``` integration test 
