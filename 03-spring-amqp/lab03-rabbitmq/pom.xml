@@ -14,6 +14,7 @@
         <module>lab03-exchange-type-demo</module>
         <module>lab03-testcontainer-demo</module>
         <module>lab03-pub-confirms-returns</module>
+        <module>lab03-simple-errorhandler</module>
     </modules>
 
     <properties>

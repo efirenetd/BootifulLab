@@ -3,19 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>bootiful-lab</artifactId>
+        <artifactId>lab03-rabbitmq</artifactId>
         <groupId>org.efire.net</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>01-spring-mvc</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>lab01-restapi-redis-cache</module>
-        <module>lab03-rest-assured</module>
-        <module>lab01-restapi-caffeine-cache</module>
-        <module>lab01-graphql-book-details</module>
-    </modules>
+    <artifactId>lab03-simple-errorhandler</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
