@@ -7,11 +7,12 @@
 		<module>01-spring-mvc</module>
 		<module>02-spring-kafka</module>
         <module>03-spring-amqp</module>
-    </modules>
+		<module>05-spring-data-jpa</module>
+	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.1</version>
+		<version>2.7.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.efire.net</groupId>
